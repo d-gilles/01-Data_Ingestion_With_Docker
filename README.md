@@ -139,6 +139,16 @@ To ingest the next table I wrote a notebook ingest_data.ipynb and converted it t
 
 Use `docker build --rm -t ingest_data:v001 . ` to build to image.
 
+If you get an error:
+```bach
+failed to solve with frontend dockerfile.v0:
+failed to read dockerfile:
+error from sender:
+open ny_taxi_postgres_data: permission denied
+```
+use this command to allow access to `ny_taxi_postgres_data` folder:</br>
+`sudo chmod  777 ny_taxi_postgres_data`
+
 Set the URL where the data is located :
 
 `URL='https://d37ci6vzurychx.cloudfront.net/misc/taxi+_zone_lookup.csv'`
@@ -147,7 +157,7 @@ And finally run the docker container:
 
 ``` bash
 docker run -it \
-  --network=no_1_pg-network \
+  --network=data-ingestion-with-docker_pg-network \
   taxi_ingest:v001 \
     --pwd=root \
     --user=root \
