@@ -144,7 +144,7 @@ docker-compose down
 
 To ingest the next table I wrote a notebook ingest_data.ipynb and converted it to ingest_data.py. The dockerfile is mend to build an image to run this file in a container and ingest more data to the db.
 
-Use `docker build --rm -t ingest_data:v001 . ` to build to image.
+Use `docker build --rm -t taxi_ingest:v001 .` to build to image.
 
 If you get an error:
 ```bach
@@ -163,15 +163,15 @@ Set the URL where the data is located :
 And finally run the docker container:
 
 ``` bash
-docker run -it \
+docker run -it --rm \
   --network=data-ingestion-with-docker_pg-network \
   taxi_ingest:v001 \
-    --pwd=root \
-    --user=root \
-    --host=pgdatabase \
-    --db=ny_taxi \
-    --port=5432 \
-    --url=${URL} \
-    --table_name=zones \
-    --zip=False
+  --pwd=root \
+  --user=root \
+  --host=pgdatabase \
+  --db=ny_taxi \
+  --port=5432 \
+  --url=${URL} \
+  --table_name=zones \
+  --zip=False
 ```
