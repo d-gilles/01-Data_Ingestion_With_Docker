@@ -11,7 +11,8 @@ This project demonstrates a data ingestion using **Docker** containers, **Postgr
 
 ## install requirements
 To install all the required dependencies for this project run:</br>
-  `pip install -r requirements.txt`
+  `pip install -r requirements.txt`</br>
+Other than that you need a Docker daemon running on your machine to be able to handle the docker stuff.
 
 ## run a network in Docker
 ```bash
@@ -90,6 +91,8 @@ Stop the docker containers by running
 Run `docker stop <id>` to stop the 2 containers.
 
 # Use docker-compose to start the 2 containers in one process.
+
+The docker-compose.yaml looks like this:
 
 ``` bash
 services:   # services we want to include
