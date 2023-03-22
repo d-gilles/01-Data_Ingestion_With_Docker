@@ -9,6 +9,10 @@ This project demonstrates a data ingestion using **Docker** containers, **Postgr
 **Docker-Compose:** Simplifies container orchestration and management.</br>
 **Docker Container** Build and run a docker container running a Python script to ingest a second table to the db.
 
+## install requirements
+To install all the required dependencies for this project run:</br>
+  `pip install -r requirements.txt`
+
 ## run a network in Docker
 ```bash
 docker network create pg-network
@@ -26,6 +30,8 @@ docker run -it \
   --name=pgdatabase \
   postgres:13
 ```
+The postgres docker image we use, can be found [here](
+https://hub.docker.com/layers/library/postgres/13/images/sha256-b23f1053795f3ecbad72264caaad696c241827e659da6d18c576e04b773ff9a1?context=explore)
 
 The datebase can now be accessed by `pgcli` from bash,
 or by sqlachemist using python.
@@ -40,6 +46,7 @@ docker run -it \
   --name=pgAdmin \
   dpage/pgadmin4
 ```
+The pgAdmin docker image we use, can be found [here](https://hub.docker.com/r/dpage/pgadmin4)
 
 This container runs a web interface for accessing the db. You can find the interface [here](http://localhost:8080/browser/)
 
