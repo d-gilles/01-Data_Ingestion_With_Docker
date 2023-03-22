@@ -1,5 +1,5 @@
 # Data Ingestion Pipeline with Docker
-This project demonstrates a data ingestion using **Docker** containers, **PostgreSQL**, and **Python**. We set up multiple containers to run a PostgreSQL database, pgAdmin, and a data ingestion script, connected through a Docker network. The pipeline fetches data from the web and inserts it into the database, showcasing an efficient and scalable environment for data processing.
+This project demonstrates a data ingestion pipeline using **Docker** containers, **PostgreSQL**, and **Python**. We set up multiple containers to run a PostgreSQL database, pgAdmin, and a data ingestion script, connected through a Docker network. The pipeline fetches data from the web and inserts it into the database, showcasing an efficient and scalable environment for data processing.
 
 ### Overview:
 **Docker Network:** Enables communication between the containers.</br>
@@ -7,19 +7,19 @@ This project demonstrates a data ingestion using **Docker** containers, **Postgr
 **pgAdmin:** Container running pgAdmin for database management.</br>
 **Data Ingestion:** Python script for fetching and inserting data into the database.</br>
 **Docker-Compose:** Simplifies container orchestration and management.</br>
-**Docker Container** Build and run a docker container running a Python script to ingest a second table to the db.
+**Docker Container:** Build and run a docker container running a Python script to ingest a second table to the database.</br>
 
-## install requirements
-To install all the required dependencies for this project run:</br>
-  `pip install -r requirements.txt`</br>
-Other than that you need a Docker daemon running on your machine to be able to handle the docker stuff.
+## Install Requirements
+To install all the required dependencies for this project, run:</br>
+`pip install -r requirements.txt`</br>
+Additionally, you need a Docker daemon running on your machine to handle the Docker-related tasks.
 
-## run a network in Docker
+## Create a Network in Docker
 ```bash
 docker network create pg-network
 ```
 
-## run local postgres server in network
+## Run Local PostgreSQL Server in Network
 ``` bash
 docker run -it \
   -e POSTGRES_USER="root" \
@@ -31,13 +31,13 @@ docker run -it \
   --name=pgdatabase \
   postgres:13
 ```
-The postgres docker image we use, can be found [here](
+The PostgreSQL Docker image we use can be found [here](
 https://hub.docker.com/layers/library/postgres/13/images/sha256-b23f1053795f3ecbad72264caaad696c241827e659da6d18c576e04b773ff9a1?context=explore)
 
 The datebase can now be accessed by `pgcli` from bash,
 or by sqlachemist using python.
 
-## run pgAdmin to connect to postgres server in network
+## Run pgAdmin to Connect to PostgreSQL Server in Network
 ```bash
 docker run -it \
   -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
@@ -47,9 +47,9 @@ docker run -it \
   --name=pgAdmin \
   dpage/pgadmin4
 ```
-The pgAdmin docker image we use, can be found [here](https://hub.docker.com/r/dpage/pgadmin4)
+The pgAdmin Docker image we use can be found [here](https://hub.docker.com/r/dpage/pgadmin4)
 
-This container runs a web interface for accessing the db. You can find the interface [here](http://localhost:8080/browser/)
+This container runs a web interface for accessing the database. You can find the interface [here](http://localhost:8080/browser/)
 
 To access pgAdmin use USER:`admin@admin.com` und PWD: `root`.
 
@@ -59,18 +59,17 @@ Connect to the database using:
 - PWD : root
 
 
-## write a notebook to ingest the first table to the database
-  look at the upload-data.ipynb
-### convert the upload-data.ipynb to python file:
+## Write a Notebook to Ingest the First Table to the Database
+  Refer to the upload-data.ipynb file.
+### Convert the upload-data.ipynb to Python File:
 ```bash
 jupyter nbconvert --to=script upload-data.ipynb
 ```
 Clean up a bit and save as upload-data.py
 
-# run python file to insert date to database:
+# Run Python File to Insert Data to Database:
 
-First we give the url as environmet variable in bash and then run the script locally. This file is mend to run local with the command below:
-
+First, set the URL as an environment variable in bash and then run the script locally. This file is meant to be run locally with the command below:
 ```bash
 URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
 
@@ -85,12 +84,12 @@ python upload-data.py \
     --zip=TRUE
 ```
 
-Now the first table is created in the pg db.
-Stop the docker containers by running
-`docker ps` and find the container ids to stop.
+Now the first table is created in the PostgreSQL database.
+Stop the Docker containers by running
+`docker ps` and find the container IDs to stop.
 Run `docker stop <id>` to stop the 2 containers.
 
-# Use docker-compose to start the 2 containers in one process.
+# Use Docker-Compose to Start the 2 Containers in One Process
 
 The docker-compose.yaml looks like this:
 
@@ -143,13 +142,15 @@ docker-compose down
 
 
 
-# Download another file
+# Download Another File
 
-To ingest the next table I wrote a notebook ingest_data.ipynb and converted it to ingest_data.py. The dockerfile is mend to build an image to run this file in a container and ingest more data to the db.
+To ingest the next table, I wrote a notebook ingest_data.ipynb and converted it to ingest_data.py. The Dockerfile is meant to build an image to run this file in a container and ingest more data to the database.
 
-Use `docker build --rm -t taxi_ingest:v001 .` to build to image.
+Use `docker build --rm -t taxi_ingest:v001 .` to build the image.
 
 If you get an error:
+
+
 ```bach
 failed to solve with frontend dockerfile.v0:
 failed to read dockerfile:
