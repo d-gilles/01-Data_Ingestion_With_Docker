@@ -31,5 +31,5 @@ services:   # services we want to include
 
 # network
 networks:
-  pg-network:
+  dtc-network:
     driver: bridge
