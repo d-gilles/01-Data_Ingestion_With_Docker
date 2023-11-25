@@ -18,6 +18,7 @@ Additionally, you need a Docker daemon running on your machine to handle the Doc
 ```bash
 docker network create pg-network
 ```
+or use `make network`
 
 ## Run Local PostgreSQL Server in Network
 ``` bash
@@ -31,6 +32,8 @@ docker run -it \
   --name=pgdatabase \
   postgres:13
 ```
+or use `make postgresql`
+
 The PostgreSQL Docker image we use can be found [here](
 https://hub.docker.com/layers/library/postgres/13/images/sha256-b23f1053795f3ecbad72264caaad696c241827e659da6d18c576e04b773ff9a1?context=explore)
 
@@ -59,8 +62,8 @@ Connect to the database using:
 - PWD : root
 
 
-## Write a Notebook to Ingest the First Table to the Database
-  Refer to the upload-data.ipynb file.
+## Use a Notebook to Ingest the First Table to the Database
+  Have a look at the  [upload-data.ipynb](upload-data.ipynb) file.
 ### Convert the upload-data.ipynb to Python File:
 ```bash
 jupyter nbconvert --to=script upload-data.ipynb
@@ -83,6 +86,7 @@ python upload-data.py \
     --table_name=yellow_taxi_trips \
     --zip=TRUE
 ```
+or run `make ingest`
 
 Now the first table is created in the PostgreSQL database.
 Stop the Docker containers by running
@@ -168,7 +172,7 @@ And finally run the docker container:
 
 ``` bash
 docker run -it --rm \
-  --network=data-ingestion-with-docker_pg-network \
+  --network=01-data_ingestion_with_docker_pg-network \
   taxi_ingest:v001 \
   --pwd=root \
   --user=root \
