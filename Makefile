@@ -33,6 +33,18 @@ ingest:
 			--table_name=yellow_taxi_trips \
 			--zip=TRUE
 
+ingest_green:
+	URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"
+	python ingest_data.py \
+			--pwd=root \
+			--user=root \
+			--host=localhost \
+			--db=ny_taxi \
+			--port=5432 \
+			--url==https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz \
+			--table_name=green_taxi_trips \
+			--zip=TRUE
+
 ingest-zones:
 	URL='https://d37ci6vzurychx.cloudfront.net/misc/taxi+_zone_lookup.csv'
 	docker run -it --rm \

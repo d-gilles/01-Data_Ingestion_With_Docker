@@ -14,7 +14,8 @@ def main(params):
     table_name = params.table_name
     url = params.url
 
-    csv_name = 'output.csv'
+    csv_name = 'output.csv.gz'
+    print(url)
 
     os.system(f"wget {url} -O {csv_name}")
 
